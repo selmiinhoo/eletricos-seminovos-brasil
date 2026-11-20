@@ -9,7 +9,7 @@
 
 ## Evolução dos indicadores
 
-![Painel com barras de emplacamentos e pontos de recarga e gráfico de rosca da participação dos BEV](painel-mobilidade.svg)
+![Painel com barras de emplacamentos e pontos de recarga e gráfico de rosca da participação dos BEV](painel-mobilidade-revisado.svg)
 
 As barras comparam volumes publicados, com os valores exatos em cada coluna. Os intervalos entre os levantamentos de infraestrutura são diferentes. Em 2025, os BEV representaram **35,8%** dos **223.912** veículos leves eletrificados emplacados, no recorte da ABVE que inclui híbridos.
 
