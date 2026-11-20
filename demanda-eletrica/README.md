@@ -1,5 +1,7 @@
 # Carros e scooters elétricas: quanto muda a demanda por eletricidade no Brasil?
 
+**[Abrir painel de KPIs com gráficos e fontes →](painel.md)**
+
 ## Indicadores observados
 
 - **+30,13%** nos emplacamentos de BEV leves em 2025 frente a 2024.
