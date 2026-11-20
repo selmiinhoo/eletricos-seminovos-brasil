@@ -9,44 +9,9 @@
 
 ## Evolução dos indicadores
 
-### Veículos leves 100% elétricos
+![Painel com barras de emplacamentos e pontos de recarga e gráfico de rosca da participação dos BEV](painel-mobilidade.svg)
 
-```mermaid
-xychart-beta
-  x-axis ["2024", "2025"]
-  y-axis "Emplacamentos" 0 --> 90000
-  bar [61615, 80178]
-```
-
-### Motos elétricas
-
-```mermaid
-xychart-beta
-  x-axis ["Jan–out 2025", "Jan–out 2026"]
-  y-axis "Emplacamentos" 0 --> 16000
-  bar [7149, 14469]
-```
-
-### Infraestrutura de recarga
-
-```mermaid
-xychart-beta
-  x-axis ["Ago 2025", "Jun 2026", "Ago 2026"]
-  y-axis "Pontos de recarga" 0 --> 32000
-  bar [16880, 25429, 29866]
-```
-
-As barras representam levantamentos em datas específicas. Os intervalos entre as datas são diferentes.
-
-### Participação dos BEV entre os veículos leves eletrificados em 2025
-
-```mermaid
-pie
-  "100% elétricos (BEV)" : 80178
-  "Demais eletrificados no recorte da ABVE" : 143734
-```
-
-Os BEV representaram **35,8%** dos **223.912** veículos leves eletrificados emplacados em 2025. O denominador corresponde ao recorte da ABVE e inclui híbridos.
+As barras comparam volumes publicados, com os valores exatos em cada coluna. Os intervalos entre os levantamentos de infraestrutura são diferentes. Em 2025, os BEV representaram **35,8%** dos **223.912** veículos leves eletrificados emplacados, no recorte da ABVE que inclui híbridos.
 
 ## Como conferir os dados
 
