@@ -1,0 +1,13 @@
+ano,cenario,modalidade,unidades,energia_twh,pct_consumo_brasil_2025,recarga_3_pct_gw,recarga_10_pct_gw,recarga_20_pct_gw
+2030,acelerado,carro BEV,1100000,2.34667,0.41409,0.231,0.77,1.54
+2030,acelerado,scooter elétrica,650000,0.17206,0.03036,0.0156,0.052,0.104
+2030,central,carro BEV,650000,1.38667,0.24469,0.1365,0.455,0.91
+2030,central,scooter elétrica,350000,0.09265,0.01635,0.0084,0.028,0.056
+2030,gradual,carro BEV,300000,0.64,0.11293,0.063,0.21,0.42
+2030,gradual,scooter elétrica,150000,0.03971,0.00701,0.0036,0.012,0.024
+2035,acelerado,carro BEV,3000000,6.4,1.12935,0.63,2.1,4.2
+2035,acelerado,scooter elétrica,1800000,0.47647,0.08408,0.0432,0.144,0.288
+2035,central,carro BEV,1600000,3.41333,0.60232,0.336,1.12,2.24
+2035,central,scooter elétrica,900000,0.23824,0.04204,0.0216,0.072,0.144
+2035,gradual,carro BEV,800000,1.70667,0.30116,0.168,0.56,1.12
+2035,gradual,scooter elétrica,400000,0.10588,0.01868,0.0096,0.032,0.064
