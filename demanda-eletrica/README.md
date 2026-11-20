@@ -1,5 +1,13 @@
 # Carros e scooters elétricas: quanto muda a demanda por eletricidade no Brasil?
 
+## Indicadores observados
+
+- **+30,13%** nos emplacamentos de BEV leves em 2025 frente a 2024.
+- **+102,39%** nos emplacamentos de motos elétricas de janeiro a outubro de 2026 frente ao mesmo período de 2025.
+- **+76,93%** nos pontos públicos e semipúblicos de recarga de agosto de 2025 a agosto de 2026.
+
+Veja a [tabela completa de KPIs](kpis.md), a [consulta SQL](kpis.sql) e o [CSV para Excel ou Power BI](kpis.csv). Os cenários de energia abaixo usam hipóteses de frota e recarga.
+
 Continuação do projeto de [elétricos seminovos](../README.md). A base anterior mostra 61.615 BEV leves novos emplacados em 2024 e 80.178 em 2025. A análise abaixo troca o foco de vendas novas para frota média em circulação: é ela que consome energia. Os emplacamentos da ABVE servem como referência de escala. A projeção usa cenários explícitos de frota, sem extrapolar a taxa de crescimento de 2025.
 
 ## Resultados
