@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Carteira e retenção</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f0f5f4;color:#142d2a;font:16px system-ui,sans-serif}header{background:#103933;color:white;padding:34px max(5vw,20px)}h1{margin:0;font-size:clamp(27px,5vw,42px)}header p{color:#cce6db;margin-bottom:0}main{max-width:1160px;margin:auto;padding:24px 5vw}label{font-weight:650}select{font:inherit;margin-left:8px;padding:8px;background:white;border:1px solid #68817a;border-radius:7px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px;margin:18px 0}.card,section{background:white;border:1px solid #d7e4df;border-radius:14px;padding:18px}.card strong{display:block;font-size:32px;color:#125c4b}.card small{color:#47645c}section{margin:14px 0}.plot{display:flex;gap:12px;align-items:end;height:145px}.month{flex:1;text-align:center;font-size:13px}.bar{background:#16836a;border-radius:5px 5px 0 0;max-width:72px;margin:5px auto}.table{overflow:auto}table{width:100%;border-collapse:collapse;min-width:610px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #e2ece8}h2{font-size:20px;margin-top:0}summary{cursor:pointer;color:#125c4b}button{font:inherit;background:#125c4b;color:white;border:0;border-radius:8px;padding:9px 13px;cursor:pointer;margin-top:12px}</style>
+<header><h1>Carteira e retenção</h1><p>Dashboard de Customer Success · Dados 100% simulados</p></header>
+<main><label>Segmento <select id="seg"><option>Todos</option><option>PME</option><option>Enterprise</option></select></label><div class="cards" id="cards"></div>
+<section><h2>Cancelamento mensal da carteira inicial</h2><div id="plot" class="plot"></div></section>
+<section><h2>Contas ativas para priorizar</h2><div class="table"><table><thead><tr><th>Conta</th><th>Segmento</th><th>Dias sem uso</th><th>Chamados abertos</th><th>Risco</th><th>Próxima ação</th></tr></thead><tbody id="queue"></tbody></table></div><button id="download">Baixar base filtrada em CSV</button></section>
+<section><details open><summary>Como os indicadores são calculados</summary><p>Base sintética de 80 contas, maio a outubro de 2026. A retenção e o churn consideram as contas ativas no início de outubro. Ativação em 30 dias considera as contas iniciadas até setembro, com janela de acompanhamento completa. Risco da carteira no fechamento de outubro soma dois pontos por 21 dias ou mais sem uso, um por dois ou mais chamados abertos e um por ativação ainda pendente. A fila mostra até oito contas com dois pontos ou mais.</p></details></section></main>
+<script>
+const rows=Array.from({length:80},(_,i)=>({conta:"Conta "+String(i+1).padStart(3,"0"),segmento:i%4===0?"Enterprise":"PME",entrada:5+i%6,cancelamento:i%9===0?Math.min(10,Math.max(7+i%4,5+i%6)):0,dias_ativacao:i%6===0?0:5+i%32,dias_sem_uso:(i*13)%39,chamados:(i*7)%5})).filter(r=>!r.cancelamento||r.cancelamento>=r.entrada);
+const seg=document.querySelector("#seg"), all=id=>document.getElementById(id);
+const filtered=()=>rows.filter(r=>seg.value==="Todos"||r.segmento===seg.value);
+const pct=(a,b)=>b?(100*a/b).toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1})+"%":"—";
+const opening=(data,m)=>data.filter(r=>r.entrada<m&&(!r.cancelamento||r.cancelamento>=m));
+const churned=(data,m)=>opening(data,m).filter(r=>r.cancelamento===m).length;
+const risk=r=>2*(r.dias_sem_uso>=21)+(r.chamados>=2)+(r.dias_ativacao===0);
+const sorted=(a,b)=>risk(b)-risk(a)||b.dias_sem_uso-a.dias_sem_uso;
+function render(){
+ const data=filtered(),active=data.filter(r=>!r.cancelamento),start=opening(data,10).length,lost=churned(data,10),eligible=data.filter(r=>r.entrada<=9),activated=eligible.filter(r=>r.dias_ativacao>0&&r.dias_ativacao<=30),watch=active.filter(r=>risk(r)>=2).sort(sorted);
+ all("cards").innerHTML=[["Contas ativas",active.length,"Fechamento de outubro"],["Retenção",pct(start-lost,start),(start-lost)+" de "+start+" contas iniciais"],["Churn",pct(lost,start),lost+" cancelamento(s) da base inicial"],["Ativação em 30 dias",pct(activated.length,eligible.length),activated.length+" de "+eligible.length+" contas elegíveis"],["Contas em risco",watch.length,"Pontuação a partir de 2"]].map(([n,v,d])=>'<div class="card">'+n+'<strong>'+v+'</strong><small>'+d+'</small></div>').join("");
+ all("plot").innerHTML=["Mai","Jun","Jul","Ago","Set","Out"].map((n,i)=>{const m=i+5,b=opening(data,m).length,c=churned(data,m);return '<div class="month">'+pct(c,b)+'<div class="bar" style="height:'+Math.max(2,b?Math.min(100,500*c/b):0)+'px"></div>'+n+'</div>'}).join("");
+ all("queue").innerHTML=watch.slice(0,8).map(r=>'<tr><td>'+r.conta+'</td><td>'+r.segmento+'</td><td>'+r.dias_sem_uso+'</td><td>'+r.chamados+'</td><td>'+risk(r)+'</td><td>'+(r.chamados>=2?'Revisar chamados e alinhar retorno':'Retomar contato e revisar adoção')+'</td></tr>').join("")||'<tr><td colspan="6">Sem contas na fila deste segmento.</td></tr>';
+}
+seg.onchange=render;
+all("download").onclick=()=>{const data=filtered(),keys=Object.keys(rows[0]);const url=URL.createObjectURL(new Blob(["\uFEFF"+[keys.join(";"),...data.map(r=>keys.map(k=>r[k]).join(";"))].join("\n")],{type:"text/csv;charset=utf-8"}));const a=document.createElement("a");a.href=url;a.download="carteira-simulada.csv";a.click();setTimeout(()=>URL.revokeObjectURL(url),500);};
+render();
+</script></html>
