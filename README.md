@@ -1,5 +1,10 @@
 # Quando os elétricos seminovos devem ganhar escala no Brasil?
 
+## Projetos de portfólio
+
+- **Mobilidade elétrica:** emplacamentos, cenários de revenda e [painel de demanda e recarga](demanda-eletrica/painel.md), com fontes e cálculos em SQL.
+- **Customer Success:** [dashboard de carteira e retenção](dashboard-carteira-retencao.html), com filtros, KPIs e priorização de contas. Os dados são sintéticos. Baixe o HTML e abra no navegador para interagir.
+
 Estudo de portfólio de **Selmo Alves de Lima Neto**. O projeto usa SQL e Python para analisar os emplacamentos de veículos leves 100% elétricos (BEV) e simular quando os grupos emplacados em cada ano podem chegar ao mercado de seminovos.
 
 ## O que os dados mostram
